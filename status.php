@@ -22,7 +22,7 @@
         <td><?= $nomor++ ?></td>
         <td><?= $d["status_nama"] ?></td>
         <td>
-            <a href="" class="btn btn-edit">Edit</a>
+            <a href="status_edit.php?id=<?= $d['id'] ?>" class="btn btn-edit">Edit</a>
             <a href="" class="btn btn-delete">Delete</a>
         </td>
     </tr>

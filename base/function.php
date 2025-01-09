@@ -12,12 +12,7 @@ function dataQuery($query) {
     return $data;
 }
 
-function executeQuery($query) {
-    global $koneksi;
-    mysqli_query($koneksi, $query);
-
-    return mysqli_affected_rows($koneksi);
-}
+//CREATE
 
 function createData($table, $data) {
     global $koneksi;
@@ -46,18 +41,55 @@ function createData($table, $data) {
     }
     
     mysqli_stmt_bind_param($statement, $types, ...array_values($data));
-        // Eksekusi statement
-    if (mysqli_stmt_execute($statement)) {
-        // Tutup statement
-        mysqli_stmt_close($statement);
-
-        // Kembalikan ID terakhir jika berhasil
-        return mysqli_insert_id($koneksi);
+    mysqli_stmt_execute($statement);
+    if(mysqli_affected_rows($koneksi) > 0) {
+        return true;
+        mysqli_stmt_close();
     } else {
-        // Tangani kesalahan jika eksekusi gagal
-        $error = mysqli_stmt_error($statement);
-        mysqli_stmt_close($statement);
-        throw new Exception("Gagal Eksekusi Query: " . $error);
+        return false;
+        mysqli_stmt_close();
     }
 }
+
+//EDIT
+
+function editData($table, $id, $data) {
+    global $koneksi;
+
+    $types = "";
+    $setKolom = [];
+    $values = [];
+    foreach($data as $key => $value) {
+        $setKolom[] = "$key = ?";
+        $values[] = $value;
+        if(is_int($value) || is_bool($value)) {
+            $types .= "i";
+        } else if(is_double($value)) {
+            $types .= "d";           
+        } else {
+            $types .= "s";
+        }
+    }
+    
+    $kolom = implode(", ", $setKolom);
+    $query = "UPDATE $table SET $kolom WHERE id = $id";
+
+    // siapkan statement 
+    $statement = mysqli_prepare($koneksi, $query);
+    if(!$statement) {
+        throw new Exception("Gagal Prepare Statement ". mysqli_error($koneksi));
+    } 
+    
+    mysqli_stmt_bind_param($statement, $types, ...array_values($data));
+    mysqli_stmt_execute($statement);
+    if(mysqli_affected_rows($koneksi) > 0) {
+        return true;
+        mysqli_stmt_close();
+    } else {
+        return false;
+        mysqli_stmt_close();
+    }
+}
+
+
 ?>

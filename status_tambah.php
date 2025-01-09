@@ -3,12 +3,16 @@
     require_once("base/function.php");
 
     if(isset($_POST["submit"])) {
-        $nama = $_POST["nama"];
+        // $nama = $_POST["nama"];
 
-        $query = "INSERT INTO status (status_nama) VALUES ('$nama')";
-        mysqli_query($koneksi, $query);
+        // $query = "INSERT INTO status (status_nama) VALUES ('$nama')";
+        // mysqli_query($koneksi, $query);
 
-        if(mysqli_affected_rows($koneksi) > 0) {
+        $data = [
+          "status_nama" => $_POST["nama"],  
+        ];
+
+        if(createData("status", $data)) {
             echo "<script> alert('Data Berhasil Ditambahkan') 
                 window.location.href = 'status.php';
             </script>";
@@ -16,6 +20,7 @@
         } else {
             echo "<script> alert('Data Gagal Ditambahkan') </script>";
         }
+
     }
 
 
