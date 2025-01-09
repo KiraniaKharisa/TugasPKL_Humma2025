@@ -1,17 +1,34 @@
 <?php
 
-    $koneksi = mysqli_connect("localhost", "root", "", "perpus_rania");
+require_once("base/function.php");
 
-    $hasil = mysqli_query($koneksi, "SELECT * FROM user INNER JOIN user_role ON user.role_id = user_role.id ");
-    $data = [];
-    while($baris = mysqli_fetch_assoc($hasil)) {
-        $data[] = $baris;
+$dataRole = dataQuery("SELECT * FROM user_role ORDER BY id_role DESC");
+
+if(isset($_POST["submit"])) {
+    $data = [
+      "nama_user" => $_POST["name"],  
+      "username" => $_POST["username"],  
+      "email" => $_POST["email"],  
+      "password" => $_POST["password"],  
+      "jenis_kelamin" => $_POST["gender"],  
+      "role_id" => $_POST["role"],  
+    ];
+
+    if(createData("user", $data)) {
+        echo "<script> alert('Data Berhasil Ditambahkan') 
+            window.location.href = 'data_user.php';
+        </script>";
+        exit;
+    } else {
+        echo "<script> alert('Data Gagal Ditambahkan') </script>";
     }
+
+}
 
     require_once("layout/atas.php");
 ?>
 <h3>Tambah Data User</h3>
-<form action="/submit-data" method="post">
+<form action="" method="post">
     <label for="name">Nama</label>
     <input type="text" name="name" id="name" placeholder="Masukkan Nama" required>
 
@@ -23,21 +40,21 @@
 
     <label for="gender">Jenis Kelamin</label>
     <select name="gender" id="gender" required>
-        <option value="male">Laki-laki</option>
-        <option value="female">Perempuan</option>
+        <option value="Laki-Laki">Laki-laki</option>
+        <option value="Perempuan">Perempuan</option>
     </select>
 
     <label for="role">Role</label>
     <select name="role" id="role" required>
-        <option value="admin">Admin</option>
-        <option value="user">User</option>
-        <option value="editor">Editor</option>
+        <?php foreach($dataRole as $role) : ?>
+            <option value="<?= $role['id_role']; ?>"><?= $role['nama_role']; ?></option>
+        <?php endforeach; ?>
     </select>
 
     <label for="password">Password</label>
     <input type="password" name="password" id="password" placeholder="Masukkan Password" required>
 
-    <button type="submit" class="btn-submit">Tambah Data</button>
+    <button type="submit" name="submit" class="btn-submit">Tambah Data</button>
 </form>
 <?php
     require_once("layout/bawah.php");

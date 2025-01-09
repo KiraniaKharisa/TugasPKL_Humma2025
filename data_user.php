@@ -1,7 +1,19 @@
 <?php
 
     require_once("base/function.php");
-    $data = dataQuery("SELECT * FROM user INNER JOIN user_role ON user.role_id = user_role.id");
+    $data = dataQuery("SELECT * FROM user INNER JOIN user_role ON user.role_id = user_role.id_role");
+
+    if(isset($_POST['btnDelete'])) {
+        $id = $_POST['id'];
+        if(deleteQuery("user", "id_user = $id")) {
+            echo "<script> alert('Data Berhasil Dihapus') 
+                window.location.href = 'data_user.php';
+            </script>";
+            exit;
+        } else {
+            echo "<script> alert('Data Gagal Dihapus') </script>";
+        }
+    }
 
     require_once("layout/atas.php");
 ?>
@@ -29,8 +41,11 @@
         <td><?= $d["jenis_kelamin"] ?></td>
         <td><?= $d["nama_role"] ?></td>
         <td>
-            <a href="" class="btn btn-edit">Edit</a>
-            <a href="" class="btn btn-delete">Delete</a>
+            <a href="data_user_edit.php?id=<?= $d["id_user"] ?>" class="btn btn-edit">Edit</a>
+            <form action="" method="post" class="delete-form">
+                <input type="hidden" name="id" value="<?= $d["id_user"] ?>">
+                <button type="submit" name="btnDelete" onclick="return confirmButton('Anda Yakin ?')" class="btn btn-delete">Delete</button>
+            </form>
         </td>
     </tr> 
     <?php

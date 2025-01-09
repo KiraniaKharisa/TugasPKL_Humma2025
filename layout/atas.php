@@ -23,6 +23,7 @@
                 <li><a href="data_buku.php"><i class="bi bi-journals"></i> Data Buku</a></li>
                 <li><a href="kategori.php"><i class="bi bi-tag"></i> Data Kategori</a></li>
                 <li><a href="status.php"><i class="bi bi-arrow-clockwise"></i> Status</a></li>
+                <li><a href="riwayat.php"><i class="bi bi-stopwatch"></i> Riwayat</a></li>
                 <li class="logout"><a href="#home"><i class="bi bi-box-arrow-left"></i> Log Out</a></li>
             </ul>
         </div>
