@@ -20,7 +20,7 @@
         <div class="link">
             <a href="#home">Home</a>
             <a href="#about">About</a>
-            <a href="#bestSeller">BestSeller</a>
+            <a href="#bestSeller">Top Books</a>
             <a href="#contact">Contact</a>
         </div>
         <div class="link2">
@@ -63,7 +63,7 @@
                 <div class="detail">
                     <h2 class="judul">Buku Dear J</h2>
                 </div>
-                <a class="buy" href="">Detail</a>
+                <a class="buy" href="">Pinjam</a>
             </div>
             <div class="card">
                 <div class="image">
@@ -71,8 +71,13 @@
                 </div>
                 <div class="detail">
                     <h2 class="judul">Buku After Dear J</h2>
+                    <ul>
+                        <li>Kategori : Romance</li>
+                        <li>Penulis : Kirania</li>
+                        <li>Penerbit : Gramedia</li>
+                    </ul>
                 </div>
-                <a class="buy" href="">Detail</a>
+                <a class="buy" href="">Pinjam</a>
             </div>
             <div class="card">
                 <div class="image">
@@ -81,7 +86,7 @@
                 <div class="detail">
                     <h2 class="judul">Buku With J</h2>
                 </div>
-                <a class="buy" href="">Detail</a>
+                <a class="buy" href="">Pinjam</a>
             </div>
             <div class="card">
                 <div class="image">
@@ -90,7 +95,7 @@
                 <div class="detail">
                     <h2 class="judul">Buku After With J</h2>
                 </div>
-                <a class="buy" href="">Detail</a>
+                <a class="buy" href="">Pinjam</a>
             </div>
             <div class="card">
                 <div class="image">
@@ -99,7 +104,7 @@
                 <div class="detail">
                     <h2 class="judul">Buku Sunset And Rosie</h2>
                 </div>
-                <a class="buy" href="">Detail</a>
+                <a class="buy" href="">Pinjam</a>
             </div>
             <div class="card">
                 <div class="image">
@@ -108,7 +113,7 @@
                 <div class="detail">
                     <h2 class="judul">Buku Rindu</h2>
                 </div>
-                <a class="buy" href="">Detail</a>
+                <a class="buy" href="">Pinjam</a>
             </div>
             <div class="card">
                 <div class="image">
@@ -117,7 +122,7 @@
                 <div class="detail">
                     <h2 class="judul">Buku Pulang</h2>
                 </div>
-                <a class="buy" href="">Detail</a>
+                <a class="buy" href="">Pinjam</a>
             </div>
             <div class="card">
                 <div class="image">
@@ -126,7 +131,7 @@
                 <div class="detail">
                     <h2 class="judul">Buku Pergi</h2>
                 </div>
-                <a class="buy" href="">Detail</a>
+                <a class="buy" href="">Pinjam</a>
             </div>
             <div class="card">
                 <div class="image">
@@ -135,7 +140,7 @@
                 <div class="detail">
                     <h2 class="judul">Buku Hujan</h2>
                 </div>
-                <a class="buy" href="">Detail</a>
+                <a class="buy" href="">Pinjam</a>
             </div>
             <div class="card">
                 <div class="image">
@@ -144,7 +149,7 @@
                 <div class="detail">
                     <h2 class="judul">Buku Eliana</h2>
                 </div>
-                <a class="buy" href="">Detail</a>
+                <a class="buy" href="">Pinjam</a>
             </div>
         </div>        
     </section>

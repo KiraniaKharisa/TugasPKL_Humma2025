@@ -1,5 +1,41 @@
 <?php
+session_start();
+if(isset($_SESSION["login"]))
+{
+  header("Location: dashboard.php");
+  exit();
+}
+require_once("base/function.php");
+    if(isset($_POST['login'])) {
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        
+        $result =  mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username'");
+        $data = dataQuery("SELECT * FROM user WHERE username = '$username'");
 
+        // Cek Username 
+        if( mysqli_num_rows($result) === 1 )
+        {
+            // Cek Pass 
+            $row = mysqli_fetch_assoc($result);
+            if( password_verify($password, $row["password"]) ) 
+            {
+                $_SESSION["user_id"] = $data[0]['id_user'];
+                $_SESSION["login"] = true;
+                echo "<script> alert('Login Berhasil') 
+                    window.location.href = 'dashboard.php';
+                </script>";
+                exit();
+            } else {
+                echo "<script> alert('Login Gagal Data Tidak Diketahui') 
+                </script>";
+
+            }
+        } else {
+            echo "<script> alert('Login Gagal Data Tidak Diketahui') 
+                </script>";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +57,7 @@
             <form action="" method="post">
                 <input type="text" name="username" placeholder="Username">
                 <input type="password" name="password" placeholder="Password">
-                <button type="submit">Login</button>
+                <button type="submit" name="login">Login</button>
             </form>
             <p>Don't Have Account? <a href="register.php">Register Here</a></p>
         </div>

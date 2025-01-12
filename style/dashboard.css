@@ -58,6 +58,7 @@
     background-color: var(--navbar);
     display: flex;
     justify-content: flex-end;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
 }
 .container .row .navbar .user {
     display: flex;
@@ -79,9 +80,12 @@
     height: 100%;
     padding: 30px;
     overflow-y: auto;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
 }
-a.btn {
+form.delete-form {
+    display: inline;
+}
+a.btn, button.btn {
     text-decoration: none;
     color: white;
     padding: 10px 20px;
@@ -89,6 +93,8 @@ a.btn {
     font-size: 14px;
     font-weight: bold;
     display: inline-block;
+    border: none;
+    margin-top: 5px;
 }
 .btn-tambah {
     background-color: skyblue;
@@ -112,6 +118,7 @@ th, td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
+    font-size: 14px;
 }
 th {
     background-color: #f2f2f2;
@@ -135,7 +142,7 @@ label {
     color: #333333;
 }
 
-input, select {
+input, select, textarea {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -143,7 +150,11 @@ input, select {
     font-size: 14px;
 }
 
-input:focus, select:focus {
+textarea {
+    height: 250px;
+}
+
+input:focus, select:focus, textarea:focus {
     border-color: #007BFF;
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);

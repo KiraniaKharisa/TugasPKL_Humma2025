@@ -2,18 +2,26 @@
 
 require_once("base/function.php");
 
+if(!isset($_GET['id'])) {
+    header("Location: dashboard.php");
+    exit;
+}
+
+$id = $_GET['id'];
+$data = dataQuery("SELECT * FROM user_role WHERE id_role = $id");
+
 if(isset($_POST["submit"])) {
     $data = [
       "nama_role" => $_POST["namaRole"],  
     ];
 
-    if(createData("user_role", $data)) {
-        echo "<script> alert('Data Berhasil Ditambahkan') 
+    if(editData("user_role", "id_role = $id", $data)) {
+        echo "<script> alert('Data Berhasil Diedit') 
             window.location.href = 'data_role.php';
         </script>";
         exit;
     } else {
-        echo "<script> alert('Data Gagal Ditambahkan') </script>";
+        echo "<script> alert('Data Gagal Diedit') </script>";
     }
 
 }
@@ -21,10 +29,10 @@ if(isset($_POST["submit"])) {
     require_once("layout/atas.php");
     cekRole($user_login[0]['role_id'], '1');
 ?>
-<h3>Tambah Data Role</h3>
+<h3>Edit Data Role</h3>
 <form action="" method="post">
     <label for="namaRole">Nama Role</label>
-    <input type="text" name="namaRole" id="namaRole" placeholder="Masukkan Nama Role" required>
+    <input type="text" name="namaRole" id="namaRole" placeholder="Masukkan Nama Role" required value="<?= cekValue($data[0]['nama_role']) ?>">
 
     <button type="submit" name="submit" class="btn-submit">Tambah Data</button>
 </form>

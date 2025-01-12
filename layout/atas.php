@@ -1,3 +1,23 @@
+<?php
+session_start();
+require_once("base/function.php");
+if(!isset($_SESSION["login"]))
+{
+  header("Location: login.php");
+  exit();
+}
+
+$id = $_SESSION['user_id'];
+$user_login = dataQuery("SELECT * FROM user INNER JOIN user_role ON user.role_id = user_role.id_role WHERE id_user = $id");
+
+if(isset($_POST['logout'])) {
+    $_SESSION = [];
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,18 +38,23 @@
             </div>
             <ul>
                 <li><a href="dashboard.php"><i class="bi bi-house-fill"></i> Dashboard</a></li>
-                <li><a href="data_user.php"><i class="bi bi-person-fill"></i> Data User</a></li>
-                <li><a href="data_role.php"><i class="bi bi-pc-display-horizontal"></i> Data Role</a></li>
-                <li><a href="data_buku.php"><i class="bi bi-journals"></i> Data Buku</a></li>
-                <li><a href="kategori.php"><i class="bi bi-tag"></i> Data Kategori</a></li>
-                <li><a href="status.php"><i class="bi bi-arrow-clockwise"></i> Status</a></li>
-                <li class="logout"><a href="#home"><i class="bi bi-box-arrow-left"></i> Log Out</a></li>
+                <?php if($user_login[0]["role_id"] == 1): ?>
+                    <li><a href="data_user.php"><i class="bi bi-person-fill"></i> Data User</a></li>
+                    <li><a href="data_role.php"><i class="bi bi-pc-display-horizontal"></i> Data Role</a></li>
+                    <li><a href="data_buku.php"><i class="bi bi-journals"></i> Data Buku</a></li>
+                    <li><a href="kategori.php"><i class="bi bi-tag"></i> Data Kategori</a></li>
+                    <li><a href="data_pinjam.php"><i class="bi bi-stopwatch"></i> Data Peminjaman</a></li>
+                <?php endif; ?>
+                    <form action="" method="post">
+                    <li class="logout"><button type="submit" onclick="return confirmButton('Anda Yakin ?')" name="logout" class="btn btn-delete" href="#home"><i class="bi bi-box-arrow-left"></i> Log Out</button></li>
+
+                </form>
             </ul>
         </div>
         <div class="row">
             <div class="navbar">
                 <div class="user">
-                    <span>Kirania Kharisa Suyatno</span>
+                    <span><?= $user_login[0]['nama_user'] ?></span>
                     <img src="img/profile/rani.jpg" width="40" alt="">
                 </div>
             </div>

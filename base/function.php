@@ -2,6 +2,7 @@
 
 $koneksi = mysqli_connect("localhost", "root", "", "perpus_rania"); 
 
+// READ
 function dataQuery($query) {
     global $koneksi;
     $hasil = mysqli_query($koneksi, $query);
@@ -12,8 +13,7 @@ function dataQuery($query) {
     return $data;
 }
 
-//CREATE
-
+// CREATE
 function createData($table, $data) {
     global $koneksi;
     $kolom = implode(", ", array_keys($data)); // Memisahkan kunci atau key dari array data yang dikirimkan sesuai kolom dari data base jadinya akan seperti ini contoh yang dikirim kan itu array seperti ini 
@@ -51,9 +51,8 @@ function createData($table, $data) {
     }
 }
 
-//EDIT
-
-function editData($table, $id, $data) {
+// EDIT
+function editData($table, $kondisi, $data) {
     global $koneksi;
 
     $types = "";
@@ -72,7 +71,7 @@ function editData($table, $id, $data) {
     }
     
     $kolom = implode(", ", $setKolom);
-    $query = "UPDATE $table SET $kolom WHERE id = $id";
+    $query = "UPDATE $table SET $kolom WHERE $kondisi";
 
     // siapkan statement 
     $statement = mysqli_prepare($koneksi, $query);
@@ -89,6 +88,53 @@ function editData($table, $id, $data) {
         return false;
         mysqli_stmt_close();
     }
+}
+
+function deleteQuery($table, $kondisi) {
+    global $koneksi;
+    $query = "DELETE FROM $table WHERE $kondisi";
+    
+    try {
+        // Eksekusi query
+        if(!mysqli_query($koneksi, $query)) {
+            throw new Exception("Error executing query: " . mysqli_error($koneksi));
+        }
+        if (mysqli_affected_rows($koneksi)) {
+            return true;
+        } else {
+            return false;
+        } 
+    } catch(Exception $error) {
+        return false;
+    }
+}
+
+function cekValue($value) {
+    return (isset($value) ? $value : '');
+}
+
+function cekInput($isi, $element) {
+    // if($isi isset)
+}
+
+function cekRole($role_id, $role) {
+    if($role_id != $role) {
+        header("Location: dashboard.php");
+        exit;
+    }
+}
+
+function cekTanggal($date, $format = 'Y-m-d') {
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) === $date;
+}
+
+function validasiTanggalKembali($pinjamDate, $kembaliDate) {
+    $pinjamDateTime = new DateTime($pinjamDate);
+    $kembaliDateTime = new DateTime($kembaliDate);
+
+    // Periksa apakah tanggal kembali >= tanggal pinjam
+    return $kembaliDateTime > $pinjamDateTime;
 }
 
 
