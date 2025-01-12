@@ -5,12 +5,19 @@ require_once("base/function.php");
 $dataRole = dataQuery("SELECT * FROM user_role ORDER BY id_role DESC");
 
 if(isset($_POST["submit"])) {
+<<<<<<< HEAD
     $password =  password_hash($_POST["password"], PASSWORD_DEFAULT);
+=======
+>>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
     $data = [
       "nama_user" => $_POST["name"],  
       "username" => $_POST["username"],  
       "email" => $_POST["email"],  
+<<<<<<< HEAD
       "password" => $password,  
+=======
+      "password" => $_POST["password"],  
+>>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
       "jenis_kelamin" => $_POST["gender"],  
       "role_id" => $_POST["role"],  
     ];

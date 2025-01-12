@@ -38,6 +38,7 @@ if(isset($_POST['logout'])) {
             </div>
             <ul>
                 <li><a href="dashboard.php"><i class="bi bi-house-fill"></i> Dashboard</a></li>
+<<<<<<< HEAD
                 <?php if($user_login[0]["role_id"] == 1): ?>
                     <li><a href="data_user.php"><i class="bi bi-person-fill"></i> Data User</a></li>
                     <li><a href="data_role.php"><i class="bi bi-pc-display-horizontal"></i> Data Role</a></li>
@@ -49,6 +50,15 @@ if(isset($_POST['logout'])) {
                     <li class="logout"><button type="submit" onclick="return confirmButton('Anda Yakin ?')" name="logout" class="btn btn-delete" href="#home"><i class="bi bi-box-arrow-left"></i> Log Out</button></li>
 
                 </form>
+=======
+                <li><a href="data_user.php"><i class="bi bi-person-fill"></i> Data User</a></li>
+                <li><a href="data_role.php"><i class="bi bi-pc-display-horizontal"></i> Data Role</a></li>
+                <li><a href="data_buku.php"><i class="bi bi-journals"></i> Data Buku</a></li>
+                <li><a href="kategori.php"><i class="bi bi-tag"></i> Data Kategori</a></li>
+                <li><a href="status.php"><i class="bi bi-arrow-clockwise"></i> Status</a></li>
+                <li><a href="riwayat.php"><i class="bi bi-stopwatch"></i> Riwayat</a></li>
+                <li class="logout"><a href="#home"><i class="bi bi-box-arrow-left"></i> Log Out</a></li>
+>>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
             </ul>
         </div>
         <div class="row">

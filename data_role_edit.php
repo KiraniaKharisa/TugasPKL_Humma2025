@@ -2,11 +2,14 @@
 
 require_once("base/function.php");
 
+<<<<<<< HEAD
 if(!isset($_GET['id'])) {
     header("Location: dashboard.php");
     exit;
 }
 
+=======
+>>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
 $id = $_GET['id'];
 $data = dataQuery("SELECT * FROM user_role WHERE id_role = $id");
 
@@ -27,7 +30,10 @@ if(isset($_POST["submit"])) {
 }
 
     require_once("layout/atas.php");
+<<<<<<< HEAD
     cekRole($user_login[0]['role_id'], '1');
+=======
+>>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
 ?>
 <h3>Edit Data Role</h3>
 <form action="" method="post">

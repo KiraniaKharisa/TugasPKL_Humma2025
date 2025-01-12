@@ -93,6 +93,7 @@ function editData($table, $kondisi, $data) {
 function deleteQuery($table, $kondisi) {
     global $koneksi;
     $query = "DELETE FROM $table WHERE $kondisi";
+<<<<<<< HEAD
     
     try {
         // Eksekusi query
@@ -105,6 +106,14 @@ function deleteQuery($table, $kondisi) {
             return false;
         } 
     } catch(Exception $error) {
+=======
+
+    // Eksekusi query
+    mysqli_query($koneksi, $query);
+    if (mysqli_affected_rows($koneksi)) {
+        return true;
+    } else {
+>>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
         return false;
     }
 }
@@ -113,6 +122,7 @@ function cekValue($value) {
     return (isset($value) ? $value : '');
 }
 
+<<<<<<< HEAD
 function cekInput($isi, $element) {
     // if($isi isset)
 }
@@ -137,5 +147,7 @@ function validasiTanggalKembali($pinjamDate, $kembaliDate) {
     return $kembaliDateTime > $pinjamDateTime;
 }
 
+=======
+>>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
 
 ?>
