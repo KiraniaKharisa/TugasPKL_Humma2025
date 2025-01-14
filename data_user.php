@@ -1,11 +1,18 @@
 <?php
 
+    session_start();
     require_once("base/function.php");
-    $data = dataQuery("SELECT * FROM user INNER JOIN user_role ON user.role_id = user_role.id_role");
+    $idMasuk = $_SESSION["user_id"];
+    $data = dataQuery("SELECT * FROM user INNER JOIN user_role ON user.role_id = user_role.id_role WHERE id_user != $idMasuk");
 
     if(isset($_POST['btnDelete'])) {
         $id = $_POST['id'];
+        $dataUser = dataQuery("SELECT * FROM user WHERE id_user = $id");
         if(deleteQuery("user", "id_user = $id")) {
+            $imageLama = $dataUser[0]['profile'] != "default.jpg" ? $dataUser[0]['profile'] : false;
+                if($imageLama != false) {
+                    hapusImageLama("img/profile/$imageLama");
+                }
             echo "<script> alert('Data Berhasil Dihapus') 
                 window.location.href = 'data_user.php';
             </script>";

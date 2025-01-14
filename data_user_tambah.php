@@ -5,30 +5,56 @@ require_once("base/function.php");
 $dataRole = dataQuery("SELECT * FROM user_role ORDER BY id_role DESC");
 
 if(isset($_POST["submit"])) {
-<<<<<<< HEAD
     $password =  password_hash($_POST["password"], PASSWORD_DEFAULT);
-=======
->>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
     $data = [
-      "nama_user" => $_POST["name"],  
-      "username" => $_POST["username"],  
-      "email" => $_POST["email"],  
-<<<<<<< HEAD
+      "nama_user" => htmlspecialchars($_POST["name"]),  
+      "username" => htmlspecialchars($_POST["username"]),  
+      "email" => htmlspecialchars($_POST["email"]),  
       "password" => $password,  
-=======
-      "password" => $_POST["password"],  
->>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
-      "jenis_kelamin" => $_POST["gender"],  
+      "jenis_kelamin" => htmlspecialchars($_POST["gender"]),  
       "role_id" => $_POST["role"],  
     ];
 
-    if(createData("user", $data)) {
-        echo "<script> alert('Data Berhasil Ditambahkan') 
-            window.location.href = 'data_user.php';
-        </script>";
-        exit;
+    $cekUnikUsername = tambahCekUnique('user', 'username', $data['username']);
+    $cekUnikEmail = tambahCekUnique('user', 'email', $data['email']);
+
+    if($cekUnikUsername['status']) {
+        if($cekUnikEmail['status']) {
+            
+            if( $_FILES['profile']['error'] === 4 )
+            {
+                $profile = "default.jpg";
+            } else {
+                $profile = uploudGambar($_FILES['profile'], 'img/profile/');
+
+                if(!$profile['status']) {
+                    $pesan = $profile['pesan'];
+                    echo "<script> alert('$pesan'); 
+                    window.location.href = 'data_user_tambah.php'; </script>";
+                    exit;
+                }
+            }
+
+            $data['profile'] = (empty($profile['pesan']) ? $profile : $profile['pesan']);
+
+
+            if(createData("user", $data)) {
+                echo "<script> alert('Data Berhasil Ditambahkan') 
+                    window.location.href = 'data_user.php';
+                </script>";
+                exit;
+            } else {
+                echo "<script> alert('Data Gagal Ditambahkan') </script>";
+            }
+
+        } else {
+            $pesan = $cekUnikEmail['pesan'];
+            echo "<script> alert(`$pesan`) </script>";
+        }
+        
     } else {
-        echo "<script> alert('Data Gagal Ditambahkan') </script>";
+        $pesan = $cekUnikUsername['pesan'];
+        echo "<script> alert(`$pesan`) </script>";
     }
 
 }
@@ -37,7 +63,7 @@ if(isset($_POST["submit"])) {
     cekRole($user_login[0]['role_id'], '1');
 ?>
 <h3>Tambah Data User</h3>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <label for="name">Nama</label>
     <input type="text" name="name" id="name" placeholder="Masukkan Nama" required>
 
@@ -62,6 +88,17 @@ if(isset($_POST["submit"])) {
 
     <label for="password">Password</label>
     <input type="password" name="password" id="password" placeholder="Masukkan Password" required>
+
+    <label class="file-upload">
+        Pilih Profile
+        <input type="file" id="fileInput" name="profile">
+    </label>
+
+    <!-- Preview Container -->
+    <div class="preview-container" id="previewContainer">
+        <img id="previewImage" src="img/profile/default.jpg" alt="Preview Gambar" mode="edit">
+    </div>
+    <button class="hapusProfile">Hapus Profile</button>
 
     <button type="submit" name="submit" class="btn-submit">Tambah Data</button>
 </form>

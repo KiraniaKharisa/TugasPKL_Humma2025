@@ -13,21 +13,38 @@ if(isset($_POST['register'])) {
             "nama_user" => htmlspecialchars($_POST["nama"]),  
             "username" => htmlspecialchars($_POST["username"]),  
             "email" => htmlspecialchars($_POST["email"]),  
-            "password" => htmlspecialchars($password),  
+            "password" => $password,  
             "jenis_kelamin" => htmlspecialchars($_POST["gender"]),  
             "role_id" => 2,  
-          ];
-      
-          if(createData("user", $data)) {
-              echo "<script> alert('Registrasi Berhasil Silahkan Login') 
-                  window.location.href = 'login.php';
-              </script>";
-              exit;
-          } else {
-              echo "<script> alert('Registrasi Gagal') </script>";
+        ];
+
+        $cekUnikUsername = tambahCekUnique('user', 'username', $data['username']);
+        $cekUnikEmail = tambahCekUnique('user', 'email', $data['email']);
+
+        if($cekUnikUsername['status']) {
+            if($cekUnikEmail['status']) {
+                if(createData("user", $data)) {
+                    echo "<script> alert('Registrasi Berhasil Silahkan Login') 
+                        window.location.href = 'login.php';
+                    </script>";
+                    exit;
+                } else {
+                    echo "<script> alert('Registrasi Gagal') </script>";
+                }
+
+            } else {
+                $pesan = $cekUnikEmail['pesan'];
+                echo "<script> alert(`$pesan`) </script>";
             }
+            
         } else {
-            echo "<script> alert('Password Tidak Cocok') </script>";
+            $pesan = $cekUnikUsername['pesan'];
+            echo "<script> alert(`$pesan`) </script>";
+        }
+      
+          
+    } else {
+        echo "<script> alert('Password Tidak Cocok') </script>";
     }
 }
 

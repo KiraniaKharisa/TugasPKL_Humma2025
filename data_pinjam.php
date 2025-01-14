@@ -5,7 +5,7 @@
 
     if(isset($_POST['btnDelete'])) {
         $id = $_POST['id'];
-        if(deleteQuery("data_pinjam", "id_pinjam = $id")) {
+        if(deleteQueryPinjaman("data_pinjam", "id_pinjam", $id)) {
             echo "<script> alert('Data Berhasil Dihapus') 
                 window.location.href = 'data_pinjam.php';
             </script>";

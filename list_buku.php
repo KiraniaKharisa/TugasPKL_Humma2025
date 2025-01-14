@@ -8,7 +8,16 @@ if(isset($_SESSION['login'])) {
     $user_login = dataQuery("SELECT * FROM user INNER JOIN user_role ON user.role_id = user_role.id_role WHERE id_user = $id");
 
 }
-$data = dataQuery("SELECT * FROM buku INNER JOIN kategori_buku ON buku.category_id = kategori_buku.id_kategori ORDER BY buku.jumlah_peminjaman DESC LIMIT 10");
+$dataBuku = dataQuery("SELECT * FROM buku INNER JOIN kategori_buku ON buku.category_id = kategori_buku.id_kategori");
+$dataKategori = dataQuery("SELECT * FROM kategori_buku");
+
+if(isset($_GET['cariBtn'])) {
+
+    $query = cariBuku($_GET['cari'], $_GET['kategori']);
+
+    $dataBuku = dataQuery($query);
+}
+   
 
 ?>
 
@@ -20,7 +29,7 @@ $data = dataQuery("SELECT * FROM buku INNER JOIN kategori_buku ON buku.category_
     <link rel="stylesheet" href="style/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <title>Perpustakaan Rania</title>
+    <title>List buku</title>
 </head>
 <body>
 
@@ -28,35 +37,24 @@ $data = dataQuery("SELECT * FROM buku INNER JOIN kategori_buku ON buku.category_
         require_once('layout/navbar.php');
     ?>
 
-    <section id="home">
+    <section id="bestSeller" class="list_buku">
+        <h1>SEMUA BUKU</h1>
+        <form class="cari" action="">
+            <input type="text" name="cari" placeholder="Cari buku berdasarkan nama, penulis, penerbit">
+            <select name="kategori" id="">
+                <option value="">Semua Buku</option>
+                <?php foreach($dataKategori as $data) : ?>
+                    <?php if(isset($_GET['kategori'])) : ?>
+                        <option <?= $_GET['kategori'] == $data['id_kategori'] ? "selected" : "" ?> value="<?= $data['id_kategori'] ?>"><?= $data['nama_kategori'] ?></option>
+                    <?php else : ?>
+                        <option value="<?= $data['id_kategori'] ?>"><?= $data['nama_kategori'] ?></option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </select>
+            <button type="submit" name="cariBtn" class="btn-submit">Cari</button>
+        </form>
         <div class="container">
-            <div class="kotak1">
-            <h1>Hello Everyone</h1>
-                <p>welcome to the library website.</p>
-            </div>
-            <div class="kotak2">
-                <img src="img/gambar1.png" alt="">
-            </div>
-        </div>
-    </section>
-
-    <section id="about">
-        <h1>ABOUT</h1>
-        <div class="container">
-            <div class="kotak1">
-                <h3>Tentang Perpustakaan Kami</h3>
-                <p>Perpustakaan website adalah platform digital yang menyediakan akses ke berbagai koleksi informasi, seperti buku elektronik (e-book), jurnal, artikel, video, atau multimedia lainnya. Berfungsi sebagai pusat sumber daya daring, perpustakaan ini memungkinkan pengguna untuk mencari, membaca, dan mengunduh materi yang relevan kapan saja dan di mana saja. Biasanya dilengkapi dengan fitur pencarian, filter, dan kategori untuk mempermudah navigasi. Selain itu, perpustakaan website dapat menawarkan layanan tambahan, seperti peminjaman e-book, diskusi komunitas, atau panduan belajar. Perpustakaan jenis ini banyak digunakan oleh institusi pendidikan, organisasi, atau masyarakat umum untuk mendukung pembelajaran, penelitian, dan pengembangan pengetahuan.</p>
-            </div>
-            <div class="kotak2">
-                <img src="img/gambar2.png" alt="">
-            </div>
-        </div>
-    </section>
-
-    <section id="bestSeller">
-        <h1>10 MOST POPULAR BOOKS</h1>
-        <div class="container">
-        <?php foreach($data as $d) : ?>
+        <?php foreach($dataBuku as $d) : ?>
             <div class="card">
                 <div class="image">
                     <img src="img/books/<?= $d['cover'] ?>" alt="">
@@ -77,26 +75,8 @@ $data = dataQuery("SELECT * FROM buku INNER JOIN kategori_buku ON buku.category_
             </div>
         <?php endforeach; ?>
         </div>
-        
-        <div class="selengkapnya">
-            <a href="list_buku.php">Lebih Banyak Buku</a>
-        </div>
     </section>
     
-    <section id="contact">
-        <h1>CONTACT ME</h1>
-        <div class="contact-content">
-            <label for="firstName">FIRST NAME</label>
-            <input type="text" placeholder="First Name..." id="firstName">
-            <label for="lastName">LAST NAME</label>
-            <input type="text" placeholder="Last Name..." id="lastName">
-            <label for="email">EMAIL</label>
-            <input type="email" placeholder="Email..." id="email">
-            <label for="message">MESSAGE</label>
-            <textarea placeholder="Message..." id="message"></textarea>
-            <button type="submit">Send Me</button>
-        </div>
-    </section>
     
     <footer id="footer">
         <div class="kontak">

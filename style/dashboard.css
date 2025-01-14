@@ -9,6 +9,7 @@
     --navbar: rgb(241 245 249);
     --sidebar:   skyblue;
     --content: rgb(203 213 225);
+    --aHover: rgb(14,165,233);
 }
 
 .container {
@@ -342,4 +343,125 @@ input:focus {
 
 .btn-submit:hover {
     background-color: #0056b3;
+}
+
+#myBook .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 30px;
+    gap: 15px;
+}
+
+#myBook .container .card {
+    background-color: var(--aHover);
+    padding: 15px 30px;
+    border-radius: 10px;
+    position: relative;
+    margin-top: 30px;
+}
+#myBook .container .card .image {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+/* #myBook .container .card .detail {
+    height: 40%; 
+} */
+
+#myBook .container .card .image img {
+    width: 150px;
+    object-fit: cover;
+}
+
+#myBook .container .card .detail .judul {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+}
+#myBook .container .card .detail .kembali {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: orangered;
+}
+
+#myBook .container .card .detail ul {
+    margin-top: 10px;
+}
+#myBook .container .card .detail ul li {
+    list-style: none;
+    margin-top: 8px;
+    font-size: 15px;
+}
+
+#myBook .container .card .button {
+    position: relative;
+    width: 100%;
+    /* margin-top: -80px; */
+}
+
+#myBook .container .card .button .kembalikan {
+    background-color: orangered;
+    text-decoration: none;
+    border: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 10px 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.file-upload {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    background-color: #ddd;
+    color: #333333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.file-upload:hover {
+    background-color: #ddd;
+}
+.file-upload input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.preview-container {
+    margin: 20px 0;
+}
+.preview-container img {
+    max-width: 300px;
+    max-height: 300px;
+    margin-top: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+}
+.hapusProfile {
+    width: 300px;
+    display: block;
+    margin-bottom: 20px;
+    border: none;
+    background: orangered;
+    padding: 5px;
+    color: white;
+    font-size: 13px;
+    border-radius: 15px;
+    cursor: pointer;
 }

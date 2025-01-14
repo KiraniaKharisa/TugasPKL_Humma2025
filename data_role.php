@@ -24,7 +24,7 @@
     <tr>
         <th>NO</th>
         <th>NAMA ROLE</th>
-        <th>ACTION</th>
+        <!-- <th>ACTION</th> -->
     </tr>
     <?php
         $nomor = 1;
@@ -33,13 +33,13 @@
     <tr>
         <td><?= $nomor++ ?></td>
         <td><?= $d["nama_role"] ?></td>
-        <td>
+        <!-- <td>
             <a href="data_role_edit.php?id=<?= $d["id_role"] ?>" class="btn btn-edit">Edit</a>
             <form action="" method="post" class="delete-form">
                 <input type="hidden" name="id" value="<?= $d["id_role"] ?>">
                 <button type="submit" name="btnDelete" onclick="return confirmButton('Anda Yakin ?')" class="btn btn-delete">Delete</button>
             </form>
-        </td>
+        </td> -->
     </tr>
     <?php
         endforeach;

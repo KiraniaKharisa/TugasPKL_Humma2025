@@ -5,7 +5,12 @@
 
     if(isset($_POST['btnDelete'])) {
         $id = $_POST['id'];
+        $dataBuku = dataQuery("SELECT * FROM buku WHERE id_buku = $id");
         if(deleteQuery("buku", "id_buku = $id")) {
+            $imageLama = $dataBuku[0]['cover'];
+            if($imageLama != false) {
+                hapusImageLama("img/books/$imageLama");
+            }
             echo "<script> alert('Data Berhasil Dihapus') 
                 window.location.href = 'data_buku.php';
             </script>";

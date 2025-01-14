@@ -1,14 +1,8 @@
 <?php
-
+session_start();
 require_once("base/function.php");
 
-if(!isset($_GET['id'])) {
-    header("Location: dashboard.php");
-    exit;
-}
-
-$id = $_GET["id"];
-$dataRole = dataQuery("SELECT * FROM user_role ORDER BY id_role DESC");
+$id = $_SESSION['user_id'];
 $dataUser = dataQuery("SELECT * FROM user WHERE id_user = $id");
 
 if(isset($_POST["submit"])) {
@@ -17,8 +11,7 @@ if(isset($_POST["submit"])) {
       "nama_user" => htmlspecialchars($_POST["name"]),  
       "username" => htmlspecialchars($_POST["username"]),  
       "email" => htmlspecialchars($_POST["email"]),
-      "jenis_kelamin" => htmlspecialchars($_POST["gender"]),  
-      "role_id" => $_POST["role"],  
+      "jenis_kelamin" => htmlspecialchars($_POST["gender"]),
     ];
 
     $cekUnikUsername = editCekUnique('user', 'username', 'id_user', $id, $data["username"]);
@@ -47,7 +40,7 @@ if(isset($_POST["submit"])) {
                 if(!$profile['status']) {
                     $pesan = $profile['pesan'];
                     echo "<script> alert('$pesan'); 
-                    window.location.href = 'data_user_edit.php?id=$id'; </script>";
+                    window.location.href = 'update_profile.php; </script>";
                     exit;
                 }
             }
@@ -55,7 +48,7 @@ if(isset($_POST["submit"])) {
             $data['profile'] = (empty($profile['pesan']) ? $profile : $profile['pesan']);
             if(editData("user", "id_user = $id", $data)) {
                 echo "<script> alert('Data Berhasil Diedit') 
-                    window.location.href = 'data_user.php';
+                    window.location.href = 'update_profile.php';
                 </script>";
                 exit;
             } else {
@@ -75,9 +68,8 @@ if(isset($_POST["submit"])) {
 }
 
     require_once("layout/atas.php");
-    cekRole($user_login[0]['role_id'], '1');
 ?>
-<h3>Edit Data User</h3>
+<h3>My Profile</h3>
 <form action="" method="post" enctype="multipart/form-data">
     <input type="hidden" name="hapusProfile" id="hapusProfile" value="false">
 
@@ -94,13 +86,6 @@ if(isset($_POST["submit"])) {
     <select name="gender" id="gender" required>
         <option <?= $dataUser[0]['jenis_kelamin'] == "Laki-Laki" ? "selected" : "" ?> value="Laki-Laki">Laki-laki</option>
         <option <?= $dataUser[0]['jenis_kelamin'] == "Perempuan" ? "selected" : "" ?> value="Perempuan">Perempuan</option>
-    </select>
-
-    <label for="role">Role</label>
-    <select name="role" id="role" required>
-        <?php foreach($dataRole as $role) : ?>
-            <option <?= $dataUser[0]['role_id'] == $role['id_role'] ? "selected" : "" ?> value="<?= $role['id_role']; ?>"><?= $role['nama_role']; ?></option>
-        <?php endforeach; ?>
     </select>
 
     <label class="file-upload">

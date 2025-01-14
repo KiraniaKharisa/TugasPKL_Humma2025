@@ -4,17 +4,25 @@ require_once("base/function.php");
 
 if(isset($_POST["submit"])) {
     $data = [
-      "nama_role" => $_POST["namaRole"],  
+      "nama_role" => htmlspecialchars($_POST["namaRole"]),  
     ];
 
-    if(createData("user_role", $data)) {
-        echo "<script> alert('Data Berhasil Ditambahkan') 
-            window.location.href = 'data_role.php';
-        </script>";
-        exit;
+    $cekUnik = tambahCekUnique('user_role', 'nama_role', $data['nama_role']);
+
+    if($cekUnik['status']) {
+        if(createData("user_role", $data)) {
+            echo "<script> alert('Data Berhasil Ditambahkan') 
+                window.location.href = 'data_role.php';
+            </script>";
+            exit;
+        } else {
+            echo "<script> alert('Data Gagal Ditambahkan') </script>";
+        }
     } else {
-        echo "<script> alert('Data Gagal Ditambahkan') </script>";
+        $pesan = $cekUnik['pesan'];
+        echo "<script> alert(`$pesan`) </script>";
     }
+    
 
 }
 

@@ -2,45 +2,46 @@
 
 require_once("base/function.php");
 
-<<<<<<< HEAD
 if(!isset($_GET['id'])) {
     header("Location: dashboard.php");
     exit;
 }
 
-=======
->>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
 $id = $_GET['id'];
-$data = dataQuery("SELECT * FROM user_role WHERE id_role = $id");
+$dataRole = dataQuery("SELECT * FROM user_role WHERE id_role = $id");
 
 if(isset($_POST["submit"])) {
     $data = [
       "nama_role" => $_POST["namaRole"],  
     ];
 
-    if(editData("user_role", "id_role = $id", $data)) {
-        echo "<script> alert('Data Berhasil Diedit') 
-            window.location.href = 'data_role.php';
-        </script>";
-        exit;
+    $cekUnik = editCekUnique('user_role', 'nama_role', 'id_role', $id, $data["nama_role"]);
+
+    if($cekUnik['status']) {
+        if(editData("user_role", "id_role = $id", $data)) {
+            echo "<script> alert('Data Berhasil Diedit') 
+                window.location.href = 'data_role.php';
+            </script>";
+            exit;
+        } else {
+            echo "<script> alert('Data Gagal Diedit') </script>";
+        }
     } else {
-        echo "<script> alert('Data Gagal Diedit') </script>";
+        $pesan = $cekUnik['pesan'];
+        echo "<script> alert(`$pesan`) </script>";
     }
 
 }
 
     require_once("layout/atas.php");
-<<<<<<< HEAD
     cekRole($user_login[0]['role_id'], '1');
-=======
->>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
 ?>
 <h3>Edit Data Role</h3>
 <form action="" method="post">
     <label for="namaRole">Nama Role</label>
-    <input type="text" name="namaRole" id="namaRole" placeholder="Masukkan Nama Role" required value="<?= cekValue($data[0]['nama_role']) ?>">
+    <input type="text" name="namaRole" id="namaRole" placeholder="Masukkan Nama Role" required value="<?= cekValue($dataRole[0]['nama_role']) ?>">
 
-    <button type="submit" name="submit" class="btn-submit">Tambah Data</button>
+    <button type="submit" name="submit" class="btn-submit">Edit Data</button>
 </form>
 <?php
     require_once("layout/bawah.php");

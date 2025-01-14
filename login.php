@@ -7,8 +7,8 @@ if(isset($_SESSION["login"]))
 }
 require_once("base/function.php");
     if(isset($_POST['login'])) {
-        $username = $_POST["username"];
-        $password = $_POST["password"];
+        $username = htmlspecialchars($_POST["username"]);
+        $password = htmlspecialchars($_POST["password"]);
         
         $result =  mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username'");
         $data = dataQuery("SELECT * FROM user WHERE username = '$username'");

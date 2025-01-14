@@ -1,6 +1,5 @@
 <?php
     require_once("base/function.php");
-<<<<<<< HEAD
     
     if(!isset($_GET['id'])) {
         header("Location: dashboard.php");
@@ -11,59 +10,47 @@
     $datakategori = dataQuery("SELECT * FROM kategori_buku");
     
     if(isset($_POST["submit"])) {
+
+        $coverLama =  $dataBuku[0]['cover'];
+        if( $_FILES['cover']['error'] === 4 )
+        {
+            $cover = $coverLama;
+        } else {
+            $cover = uploudGambar($_FILES['cover'], 'img/books/', $dataBuku[0]['cover']);
+            if(!$cover['status']) {
+                $pesan = $cover['pesan'];
+                echo "<script> alert('$pesan'); 
+                window.location.href = 'data_buku_edit.php?id=$id'; </script>";
+                exit;
+            }
+        }
+
         $data = [
-            "nama_buku" => $_POST["namaBuku"],  
-            "isi" => $_POST["isiBuku"],
-            "stock" => $_POST["stock"],
-            "penulis" => $_POST["penulis"],
-            "penerbit" => $_POST["penerbit"],
+            "nama_buku" => htmlspecialchars($_POST["namaBuku"]),  
+            "isi" => htmlspecialchars($_POST["isiBuku"]),
+            "stock" => htmlspecialchars($_POST["stock"]),
+            "penulis" => htmlspecialchars($_POST["penulis"]),
+            "penerbit" => htmlspecialchars($_POST["penerbit"]),
+            "cover" => (empty($cover['pesan']) ? $cover : $cover['pesan']),
             "category_id" => $_POST["kategori"],
         ];
         
         if(editData("buku", "id_buku = $id", $data)) {
             echo "<script> alert('Data Berhasil Diedit') 
             window.location.href = 'data_buku.php';
-=======
-
-    $id = $_GET['id'];
-    $dataBuku = dataQuery("SELECT * FROM buku WHERE id_buku = $id");
-    $datakategori = dataQuery("SELECT * FROM kategori_buku");
-
-    if(isset($_POST["submit"])) {
-        $data = [
-          "nama_buku" => $_POST["namaBuku"],  
-          "isi" => $_POST["isiBuku"],
-          "stock" => $_POST["stock"],
-          "penulis" => $_POST["penulis"],
-          "penerbit" => $_POST["penerbit"],
-          "category_id" => $_POST["kategori"],
-        ];
-
-        if(editData("buku", "id_buku = $id", $data)) {
-            echo "<script> alert('Data Berhasil Diedit') 
-                window.location.href = 'data_buku.php';
->>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
             </script>";
             exit;
         } else {
             echo "<script> alert('Data Gagal Diedit') </script>";
         }
-<<<<<<< HEAD
         
     }
     
     require_once("layout/atas.php");
     cekRole($user_login[0]['role_id'], '1');
     ?>
-=======
-
-    }
-
-    require_once("layout/atas.php");
-?>
->>>>>>> 2991aac5dec7e877eecedac829850d44627d3872
 <h3>Edit Data Buku</h3>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <label for="namaBuku">Nama Buku</label>
     <input type="text" name="namaBuku" id="namaBuku" placeholder="Masukkan Nama Buku" required value="<?= cekvalue($dataBuku[0]['nama_buku']) ?>">
     
@@ -83,6 +70,16 @@
             <option <?= $dataBuku[0]['category_id'] == $kategori['id_kategori'] ? "selected" : "" ?> value="<?= $kategori['id_kategori']; ?>"><?= $kategori['nama_kategori']; ?></option>
         <?php endforeach; ?>
     </select>
+
+    <label class="file-upload">
+        Pilih Cover
+        <input type="file" id="fileInput" name="cover">
+    </label>
+
+    <!-- Preview Container -->
+    <div class="preview-container" id="previewContainer">
+        <img id="previewImage" src="img/books/<?= $dataBuku[0]['cover'] ?>" alt="Preview Gambar" mode="edit">
+    </div>
 
     <label for="isiBuku">Isi</label>
     <textarea type="text" name="isiBuku" id="isiBuku" placeholder="Masukkan Isi Buku" required><?= cekvalue($dataBuku[0]['isi']) ?></textarea>

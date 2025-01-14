@@ -4,16 +4,23 @@ require_once("base/function.php");
 
 if(isset($_POST["submit"])) {
     $data = [
-      "nama_kategori" => $_POST["namaKategori"],  
+      "nama_kategori" => htmlspecialchars($_POST["namaKategori"]),  
     ];
 
-    if(createData("kategori_buku", $data)) {
-        echo "<script> alert('Data Berhasil Ditambahkan') 
-            window.location.href = 'kategori.php';
-        </script>";
-        exit;
+    $cekUnik = tambahCekUnique('kategori_buku', 'nama_kategori', $data['nama_kategori']);
+
+    if($cekUnik['status']) {
+        if(createData("kategori_buku", $data)) {
+            echo "<script> alert('Data Berhasil Ditambahkan') 
+                window.location.href = 'kategori.php';
+            </script>";
+            exit;
+        } else {
+            echo "<script> alert('Data Gagal Ditambahkan') </script>";
+        }
     } else {
-        echo "<script> alert('Data Gagal Ditambahkan') </script>";
+        $pesan = $cekUnik['pesan'];
+        echo "<script> alert(`$pesan`) </script>";
     }
 
 }

@@ -4,12 +4,23 @@
     $datakategori = dataQuery("SELECT * FROM kategori_buku");
 
     if(isset($_POST["submit"])) {
+        $uploudGambar = uploudGambar($_FILES['cover'], 'img/books/');
+
+        if(!$uploudGambar['status']) {
+            $pesan = $uploudGambar['pesan'];
+            echo "<script> alert('$pesan') 
+                window.location.href = 'data_buku_tambah.php';
+            </script>";
+            exit;
+        }
+
         $data = [
-          "nama_buku" => $_POST["namaBuku"],  
-          "isi" => $_POST["isiBuku"],
-          "stock" => $_POST["stock"],
-          "penulis" => $_POST["penulis"],
-          "penerbit" => $_POST["penerbit"],
+          "nama_buku" => htmlspecialchars($_POST["namaBuku"]),  
+          "isi" => htmlspecialchars($_POST["isiBuku"]),
+          "stock" => htmlspecialchars($_POST["stock"]),
+          "penulis" => htmlspecialchars($_POST["penulis"]),
+          "penerbit" => htmlspecialchars($_POST["penerbit"]),
+          "cover" => $uploudGambar['pesan'],
           "category_id" => $_POST["kategori"],
         ];
 
@@ -28,7 +39,7 @@
     cekRole($user_login[0]['role_id'], '1');
 ?>
 <h3>Tambah Data Buku</h3>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <label for="namaBuku">Nama Buku</label>
     <input type="text" name="namaBuku" id="namaBuku" placeholder="Masukkan Nama Buku" required>
     
@@ -41,13 +52,24 @@
 
     <label for="penerbit">Penerbit</label>
     <input type="text" name="penerbit" id="penerbit" placeholder="Masukkan Nama Penerbit" required>
-
+    
     <label for="kategori">Kategori</label>
     <select name="kategori" id="kategori" required>
         <?php foreach($datakategori as $kategori) : ?>
             <option value="<?= $kategori['id_kategori']; ?>"><?= $kategori['nama_kategori']; ?></option>
-        <?php endforeach; ?>
-    </select>
+            <?php endforeach; ?>
+        </select>
+        
+    <label class="file-upload">
+        Pilih Cover
+        <input type="file" id="fileInput" name="cover" required>
+    </label>
+
+    <!-- Preview Container -->
+    <div class="preview-container" id="previewContainer">
+        <img id="previewImage" src="" alt="Preview Gambar" mode="create">
+    </div>
+
 
     <label for="isiBuku">Isi</label>
     <textarea type="text" name="isiBuku" id="isiBuku" placeholder="Masukkan Isi Buku" required></textarea>

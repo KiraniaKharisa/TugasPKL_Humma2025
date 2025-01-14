@@ -62,7 +62,6 @@ html {
     text-decoration: none;
     background-color: var(--buttonbg);
     padding: 6px 10px;
-    border-radius: 10px;
     margin-right: 10px;
 }
 
@@ -70,6 +69,25 @@ html {
     color: #000;
     font-weight: 500;
     transition: all 0.5s ease-in-out;
+}
+
+.navbar .link2 a.user {
+    padding: 0px;
+}
+.navbar .user {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+}
+.user span {
+    font-size: 16px;
+}
+.navbar .user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    object-fit: cover;
+    margin-right: 20px;
 }
 
 section {
@@ -135,6 +153,9 @@ section {
 #bestSeller {
     background-color: var(--bg2);
 }
+#bestSeller.list_buku {
+    padding-top: 80px;
+}
 
 #bestSeller h1 {
     text-align: center;
@@ -144,18 +165,24 @@ section {
     padding: 30px 0 40px 0;
 }
 
+#bestSeller.list_buku h1 {
+    text-align: center;
+    /* padding-top: 20px;
+    padding-bottom: 30px; 
+    padding: a ka b ki; */
+    padding: 30px 0 15px 0;
+}
+
 #bestSeller .container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     padding: 0 30px;
-    row-gap: 15px;
+    gap: 15px;
 }
 
 #bestSeller .container .card {
-    width: 200px;
-    height: 500px;
     background-color: var(--aHover);
-    padding: 15px 30px 5px 30px;
+    padding: 15px 30px;
     border-radius: 10px;
     position: relative;
 }
@@ -190,19 +217,45 @@ section {
     font-size: 15px;
 }
 
-#bestSeller .container .card .buy {
+#bestSeller .container .card .button {
+    position: relative;
+    width: 100%;
+    height: 50px;
+}
+
+#bestSeller .container .card .button .buy {
     background-color: var(--bg2);
     text-decoration: none;
-    margin-top: 5px;
+    margin-top: 10px;
     border-radius: 5px;
     font-size: 15px;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 0px;
+    right: 0px;
     padding: 10px 15px;
     letter-spacing: 2px;
     text-transform: uppercase;
     font-size: 13px;
+}
+#bestSeller .selengkapnya {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+#bestSeller .selengkapnya a {
+    background-color: var(--aHover);
+    text-decoration: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 12px 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text);
 }
 
 #contact {
@@ -304,4 +357,43 @@ section {
     font-size: 12px;
     border-top: 1.5px solid var(--colorcardborder);
     padding-top: 15px;
+}
+
+.list_buku form {
+    display: flex;
+    width: 100%;
+    margin-bottom: 40px;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+}
+.list_buku input {
+    width: 400px;
+}
+.list_buku input, .list_buku select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.list_buku input:focus, .list_buku select:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.list_buku .btn-submit {
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    padding: 8px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.list_buku .btn-submit:hover {
+    background-color: #0056b3;
 }
