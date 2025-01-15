@@ -11,29 +11,29 @@
             if($imageLama != false) {
                 hapusImageLama("img/books/$imageLama");
             }
-            echo "<script> alert('Data Berhasil Dihapus') 
+            echo "<script> alert('Data Deleted Successfully') 
                 window.location.href = 'data_buku.php';
             </script>";
             exit;
         } else {
-            echo "<script> alert('Data Gagal Dihapus') </script>";
+            echo "<script> alert('Data Failed to Delete') </script>";
         }
     }
 
     require_once("layout/atas.php");
     cekRole($user_login[0]['role_id'], '1');
 ?>
-<h3>Halaman Data Buku</h3>
+<h3>Book Data Page</h3>
 <a href="data_buku_tambah.php" class="btn btn-tambah">Tambah Data</a>
 <table border="1" cellpadding="50" class="full">
     <tr>
         <th>No</th>
-        <th>Nama Buku</th>
+        <th>Book Name</th>
         <th>Stock</th>
-        <th>Peminjaman</th>
-        <th>Penulis</th>
-        <th>Penerbit</th>
-        <th>Kategori</th>
+        <th>Borrowing</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th>Category</th>
         <th>Action</th>
     </tr>
     <?php

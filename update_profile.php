@@ -47,12 +47,12 @@ if(isset($_POST["submit"])) {
 
             $data['profile'] = (empty($profile['pesan']) ? $profile : $profile['pesan']);
             if(editData("user", "id_user = $id", $data)) {
-                echo "<script> alert('Data Berhasil Diedit') 
+                echo "<script> alert('Data Edited Successfully') 
                     window.location.href = 'update_profile.php';
                 </script>";
                 exit;
             } else {
-                echo "<script> alert('Data Gagal Diedit') </script>";
+                echo "<script> alert('Data Failed to Edit') </script>";
             }
 
         } else {
@@ -73,23 +73,23 @@ if(isset($_POST["submit"])) {
 <form action="" method="post" enctype="multipart/form-data">
     <input type="hidden" name="hapusProfile" id="hapusProfile" value="false">
 
-    <label for="name">Nama</label>
-    <input type="text" name="name" id="name" placeholder="Masukkan Nama" required value="<?= cekValue($dataUser[0]['nama_user']) ?>">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" placeholder="Enter Name" required value="<?= cekValue($dataUser[0]['nama_user']) ?>">
 
     <label for="username">Username</label>
-    <input type="text" name="username" id="username" placeholder="Masukkan Username" required value="<?= cekValue($dataUser[0]['username']) ?>">
+    <input type="text" name="username" id="username" placeholder="Enter Username" required value="<?= cekValue($dataUser[0]['username']) ?>">
 
     <label for="email">Email</label>
-    <input type="email" name="email" id="email" placeholder="Masukkan Email" required value="<?= cekValue($dataUser[0]['email']) ?>">
+    <input type="email" name="email" id="email" placeholder="Enter Email" required value="<?= cekValue($dataUser[0]['email']) ?>">
 
-    <label for="gender">Jenis Kelamin</label>
+    <label for="gender">Gender</label>
     <select name="gender" id="gender" required>
-        <option <?= $dataUser[0]['jenis_kelamin'] == "Laki-Laki" ? "selected" : "" ?> value="Laki-Laki">Laki-laki</option>
-        <option <?= $dataUser[0]['jenis_kelamin'] == "Perempuan" ? "selected" : "" ?> value="Perempuan">Perempuan</option>
+        <option <?= $dataUser[0]['jenis_kelamin'] == "Laki-Laki" ? "selected" : "" ?> value="Laki-Laki">Man</option>
+        <option <?= $dataUser[0]['jenis_kelamin'] == "Perempuan" ? "selected" : "" ?> value="Perempuan">Woman</option>
     </select>
 
     <label class="file-upload">
-        Pilih Profile
+        Choose Profile
         <input type="file" id="fileInput" name="profile">
     </label>
 
@@ -97,7 +97,7 @@ if(isset($_POST["submit"])) {
     <div class="preview-container" id="previewContainer">
         <img id="previewImage" src="img/profile/<?= $dataUser[0]['profile'] ?>" alt="Preview Gambar" mode="edit">
     </div>
-    <button class="hapusProfile">Hapus Profile</button>
+    <button class="hapusProfile">Delete Profile</button>
 
     <button type="submit" name="submit" class="btn-submit">Edit Data</button>
 </form>

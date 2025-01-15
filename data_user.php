@@ -13,27 +13,27 @@
                 if($imageLama != false) {
                     hapusImageLama("img/profile/$imageLama");
                 }
-            echo "<script> alert('Data Berhasil Dihapus') 
+            echo "<script> alert('Data Deleted Successfully') 
                 window.location.href = 'data_user.php';
             </script>";
             exit;
         } else {
-            echo "<script> alert('Data Gagal Dihapus') </script>";
+            echo "<script> alert('Data Failed to Delete') </script>";
         }
     }
 
     require_once("layout/atas.php");
     cekRole($user_login[0]['role_id'], '1');
 ?>
-<h3>Data User</h3>
-<a href="data_user_tambah.php" class="btn btn-tambah">Tambah Data</a>
+<h3>User Data</h3>
+<a href="data_user_tambah.php" class="btn btn-tambah">Add Data</a>
 <table class="full" border="1" cellpadding="50">
     <tr>
         <th>No.</th>
-        <th>Nama</th>
+        <th>Name</th>
         <th>Username</th>
         <th>Email</th>
-        <th>Jenis Kelamin</th>
+        <th>Gender</th>
         <th>Role</th>
         <th>Action</th>
     </tr>

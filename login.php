@@ -22,17 +22,17 @@ require_once("base/function.php");
             {
                 $_SESSION["user_id"] = $data[0]['id_user'];
                 $_SESSION["login"] = true;
-                echo "<script> alert('Login Berhasil') 
+                echo "<script> alert('Login Successful') 
                     window.location.href = 'dashboard.php';
                 </script>";
                 exit();
             } else {
-                echo "<script> alert('Login Gagal Data Tidak Diketahui') 
+                echo "<script> alert('Login Failed Unknown Data') 
                 </script>";
 
             }
         } else {
-            echo "<script> alert('Login Gagal Data Tidak Diketahui') 
+            echo "<script> alert('Login Failed Unknown Data') 
                 </script>";
         }
     }
@@ -53,7 +53,7 @@ require_once("base/function.php");
     <div class="container">
         <div class="login">
             <h3>WELCOME TO LIBRARY</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, ex.</p>
+            <p>Log in to continue your activities easily and safely.</p>
             <form action="" method="post">
                 <input type="text" name="username" placeholder="Username">
                 <input type="password" name="password" placeholder="Password">

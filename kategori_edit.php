@@ -19,12 +19,12 @@ if(isset($_POST["submit"])) {
 
     if($cekUnik['status']) {
         if(editData("kategori_buku", "id_kategori = $id", $data)) {
-            echo "<script> alert('Data Berhasil Diedit') 
+            echo "<script> alert('Data Edited Successfully') 
                 window.location.href = 'kategori.php';
             </script>";
             exit;
         } else {
-            echo "<script> alert('Data Gagal Diedit') </script>";
+            echo "<script> alert('Data Failed to Edit') </script>";
         }
     } else {
         $pesan = $cekUnik['pesan'];
@@ -38,10 +38,10 @@ if(isset($_POST["submit"])) {
     require_once("layout/atas.php");
     cekRole($user_login[0]['role_id'], '1');
 ?>
-<h3>Edit Data Kategori</h3>
+<h3>Edit Category Data</h3>
 <form action="" method="post">
-    <label for="namaKategori">Nama Kategori</label>
-    <input type="text" name="namaKategori" id="namaKategori" placeholder="Masukkan Nama Kategori" required value="<?= cekValue($dataKategori[0]['nama_kategori']) ?>">
+    <label for="namaKategori">Category Name</label>
+    <input type="text" name="namaKategori" id="namaKategori" placeholder="Enter Category Name" required value="<?= cekValue($dataKategori[0]['nama_kategori']) ?>">
 
     <button name="submit" type="submit" class="btn-submit">Edit Data</button>
 </form>

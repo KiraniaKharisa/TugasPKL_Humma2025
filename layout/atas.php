@@ -36,13 +36,15 @@ if(isset($_POST['logout'])) {
     <div class="container">
         <div class="sidebar">
             <div class="logo">
-                <h3>PERPUSTAKAAN</h3>
+                <h3>LIBRARY</h3>
             </div>
             <ul>
                 <li><a href="dashboard.php"><i class="bi bi-house-fill"></i> Dashboard</a></li>
                 <li><a href="update_profile.php"><i class="bi bi-person-fill"></i> My Profile</a></li>
                 <li><a href="update_password.php"><i class="bi bi-key"></i> Password</a></li>
+                <?php if($user_login[0]["role_id"] == 2): ?>
                 <li><a href="form_pinjam.php"><i class="bi bi-book-half"></i> Form Pinjam</a></li>
+                <?php endif; ?>
                 <?php if($user_login[0]["role_id"] == 1): ?>
                     <li><a href="data_user.php"><i class="bi bi-person-add"></i> Data User</a></li>
                     <li><a href="data_role.php"><i class="bi bi-pc-display-horizontal"></i> Data Role</a></li>

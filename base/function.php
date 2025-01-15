@@ -151,12 +151,12 @@ function tambahCekUnique($table, $field, $input) {
     if ($row['count'] > 0) {
         return [
             'status' => false,
-            'pesan' => "Data '$input' sudah ada dan harus unique",
+            'pesan' => "Data '$input' already exists and must be unique",
         ];
     } else {
         return [
             'status' => true,
-            'pesan' => 'Data diterima',
+            'pesan' => 'Data accepted',
         ];
     }
 }
@@ -178,7 +178,7 @@ function editCekUnique($table, $field, $filedId, $idValue, $input) {
     if ($row['count'] == 0) {
         return [
             'status' => false,
-            'pesan' => "Data dengan ID '$idValue' tidak ditemukan",
+            'pesan' => "Data with ID '$idValue' not found",
         ];
     }
 
@@ -195,12 +195,12 @@ function editCekUnique($table, $field, $filedId, $idValue, $input) {
     if ($row['count'] > 0) {
         return [
             'status' => false,
-            'pesan' => "Data '$input' sudah ada dan harus unique",
+            'pesan' => "Data '$input' already exists and must be unique",
         ];
     } else {
         return [
             'status' => true,
-            'pesan' => "Data diterima",
+            'pesan' => "Data accepted",
         ];
     }
 }
@@ -259,18 +259,18 @@ function hapusImageLama($file) {
         if (!unlink($file)) {
             return [
                 "status" => false,
-                "pesan" => "Gagal Hapus File Lama",
+                "pesan" => "Failed to Delete Old Files",
             ];
         } else {
             return [
                 "status" => true,
-                "pesan" => "Berhasil",
+                "pesan" => "Successful",
             ];
         }
     } else {
         return [
             "status" => false,
-            "pesan" => "File lama tidak ditemukan",
+            "pesan" => "Old file not found",
         ];
     }
 }
@@ -298,7 +298,7 @@ function uploudGambar($files, $pathSaveImage, $imageLama = false) {
   {
     return [
         "status" => false,
-        "pesan" => "File tidak ada",
+        "pesan" => "File does not exist",
     ];
   }
   
@@ -311,7 +311,7 @@ function uploudGambar($files, $pathSaveImage, $imageLama = false) {
   {
     return [
         "status" => false,
-        "pesan" => "Gambar harus berektenis jpg jpeg png",
+        "pesan" => "Images must be jpg, jpeg, png",
     ];
   }
   
@@ -320,7 +320,7 @@ function uploudGambar($files, $pathSaveImage, $imageLama = false) {
   {
     return [
         "status" => false,
-        "pesan" => "Gambar terlalu besar",
+        "pesan" => "Image too big",
     ];
   }
   

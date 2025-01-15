@@ -30,7 +30,7 @@ if(isset($_POST["submit"])) {
                     ];
                     
                     if(editData("buku", "id_buku = {$_POST['buku']}", $dataBuku)) {
-                        echo "<script> alert('Anda Berhasil Meminjam Dan Data Berhasil Ditambahkan') 
+                        echo "<script> alert('You Successfully Borrowed and Data Successfully Added') 
                         window.location.href = 'form_pinjam.php';
                         </script>";
                         exit;
@@ -38,26 +38,26 @@ if(isset($_POST["submit"])) {
                         echo "<script> alert('Data Gagal Diedit') </script>";
                     }
                 } else {
-                    echo "<script> alert('Data Gagal Ditambahkan') </script>";
+                    echo "<script> alert('Data Failed to Edit') </script>";
                 }
             } else {
                 $stock = $dataBuku_byid[0]["stock"];
                 echo "<script> alert(`Jumlah Yang Anda Pinjam Melebihi Stock, Stock Kami Tinggal $stock`) </script>";
             }
         } else {
-            echo "<script> alert('Tanggal Kembali Tidak Boleh Kurang Dari Tanggal Pinjam') </script>";
+            echo "<script> alert('Return date cannot be less than the borrowing date') </script>";
         }
     } else {
-        echo "<script> alert('Yang Anda Masukin Bukan Tanggal Sesuai Format') </script>";
+        echo "<script> alert('What You Entered Isn't the Date as Formatted') </script>";
     }
 
 }
 
     require_once("layout/atas.php");
 ?>
-<h3>Tambahkan Data Pinjam</h3>
+<h3>Add Borrowing Data</h3>
 <form action="" method="post">
-    <label for="buku">Nama Buku</label>
+    <label for="buku">Book Name</label>
     <select name="buku" id="buku" required>
         <?php foreach($data_buku as $data) : ?>
             <?php if(isset($_GET['buku_id'])) : ?>
@@ -68,16 +68,16 @@ if(isset($_POST["submit"])) {
         <?php endforeach; ?>
     </select>
 
-    <label for="jumlah_pinjam">Jumlah Pinjam</label>
+    <label for="jumlah_pinjam">Total Borrowing</label>
     <input type="number" min="1" step="1" name="jumlah_pinjam" id="jumlah_pinjam" placeholder="Masukkan Jumlah Peminjaman" required>
     
-    <label for="tanggal_pinjam">Tanggal Pinjam</label>
+    <label for="tanggal_pinjam">Borrowing Date</label>
     <input type="date" name="tanggal_pinjam" id="tanggal_pinjam" placeholder="Masukkan Tanggal Peminjaman" required>
     
-    <label for="tanggal_kembali">Tanggal Kembali</label>
+    <label for="tanggal_kembali">Return date</label>
     <input type="date" name="tanggal_kembali" id="tanggal_kembali" placeholder="Masukkan Tanggal Kembali" required>
 
-    <button type="submit" name="submit" class="btn-submit">Pinjam Buku</button>
+    <button type="submit" name="submit" class="btn-submit">Borrow a Book</button>
 </form>
 <?php
     require_once("layout/bawah.php");

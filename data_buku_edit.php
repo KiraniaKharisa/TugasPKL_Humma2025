@@ -36,12 +36,12 @@
         ];
         
         if(editData("buku", "id_buku = $id", $data)) {
-            echo "<script> alert('Data Berhasil Diedit') 
+            echo "<script> alert('Data Edited Successfully') 
             window.location.href = 'data_buku.php';
             </script>";
             exit;
         } else {
-            echo "<script> alert('Data Gagal Diedit') </script>";
+            echo "<script> alert('Data Failed to Edit') </script>";
         }
         
     }
@@ -51,20 +51,20 @@
     ?>
 <h3>Edit Data Buku</h3>
 <form action="" method="post" enctype="multipart/form-data">
-    <label for="namaBuku">Nama Buku</label>
+    <label for="namaBuku">Book Name</label>
     <input type="text" name="namaBuku" id="namaBuku" placeholder="Masukkan Nama Buku" required value="<?= cekvalue($dataBuku[0]['nama_buku']) ?>">
     
     <label for="stock">Stock</label>
     <input type="number" name="stock" min="0" step="1" id="stock" placeholder="Masukkan Stock Buku" required value="<?= cekvalue($dataBuku[0]['stock']) ?>">
     </select>
 
-    <label for="penulis">Penulis</label>
+    <label for="penulis">Author</label>
     <input type="text" name="penulis" id="penulis" placeholder="Masukkan Nama Penulis" required value="<?= cekvalue($dataBuku[0]['penulis']) ?>">
 
-    <label for="penerbit">Penerbit</label>
+    <label for="penerbit">Publisher</label>
     <input type="text" name="penerbit" id="penerbit" placeholder="Masukkan Nama Penerbit" required value="<?= cekvalue($dataBuku[0]['penerbit']) ?>">
 
-    <label for="kategori">Kategori</label>
+    <label for="kategori">Category</label>
     <select name="kategori" id="kategori" required>
         <?php foreach($datakategori as $kategori) : ?>
             <option <?= $dataBuku[0]['category_id'] == $kategori['id_kategori'] ? "selected" : "" ?> value="<?= $kategori['id_kategori']; ?>"><?= $kategori['nama_kategori']; ?></option>
@@ -72,7 +72,7 @@
     </select>
 
     <label class="file-upload">
-        Pilih Cover
+        Choose Cover
         <input type="file" id="fileInput" name="cover">
     </label>
 
@@ -81,7 +81,7 @@
         <img id="previewImage" src="img/books/<?= $dataBuku[0]['cover'] ?>" alt="Preview Gambar" mode="edit">
     </div>
 
-    <label for="isiBuku">Isi</label>
+    <label for="isiBuku">Contents</label>
     <textarea type="text" name="isiBuku" id="isiBuku" placeholder="Masukkan Isi Buku" required><?= cekvalue($dataBuku[0]['isi']) ?></textarea>
 
     <button type="submit" name="submit" class="btn-submit">Edit Data</button>

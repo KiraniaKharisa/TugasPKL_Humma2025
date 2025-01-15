@@ -1,6 +1,6 @@
 <nav class="navbar">
         <div class="logo">
-            <h3>PERPUSTAKAAN</h3>
+            <h3>LIBRARY</h3>
         </div>
         <div class="link">
             <a href="index.php#home">Home</a>

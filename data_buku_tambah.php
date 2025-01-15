@@ -30,7 +30,7 @@
             </script>";
             exit;
         } else {
-            echo "<script> alert('Data Gagal Ditambahkan') </script>";
+            echo "<script> alert('Data Failed to Add') </script>";
         }
 
     }
@@ -38,22 +38,22 @@
     require_once("layout/atas.php");
     cekRole($user_login[0]['role_id'], '1');
 ?>
-<h3>Tambah Data Buku</h3>
+<h3>Add Book data</h3>
 <form action="" method="post" enctype="multipart/form-data">
-    <label for="namaBuku">Nama Buku</label>
+    <label for="namaBuku">Book Name</label>
     <input type="text" name="namaBuku" id="namaBuku" placeholder="Masukkan Nama Buku" required>
     
     <label for="stock">Stock</label>
     <input type="number" name="stock" min="0" step="1" id="stock" placeholder="Masukkan Stock Buku" required>
     </select>
 
-    <label for="penulis">Penulis</label>
+    <label for="penulis">Author</label>
     <input type="text" name="penulis" id="penulis" placeholder="Masukkan Nama Penulis" required>
 
-    <label for="penerbit">Penerbit</label>
+    <label for="penerbit">Publisher</label>
     <input type="text" name="penerbit" id="penerbit" placeholder="Masukkan Nama Penerbit" required>
     
-    <label for="kategori">Kategori</label>
+    <label for="kategori">Category</label>
     <select name="kategori" id="kategori" required>
         <?php foreach($datakategori as $kategori) : ?>
             <option value="<?= $kategori['id_kategori']; ?>"><?= $kategori['nama_kategori']; ?></option>
@@ -61,7 +61,7 @@
         </select>
         
     <label class="file-upload">
-        Pilih Cover
+        Choose Cover
         <input type="file" id="fileInput" name="cover" required>
     </label>
 
@@ -71,10 +71,10 @@
     </div>
 
 
-    <label for="isiBuku">Isi</label>
+    <label for="isiBuku">Content</label>
     <textarea type="text" name="isiBuku" id="isiBuku" placeholder="Masukkan Isi Buku" required></textarea>
 
-    <button type="submit" name="submit" class="btn-submit">Tambah Data</button>
+    <button type="submit" name="submit" class="btn-submit">Add Data</button>
 </form>
 <?php
     require_once("layout/bawah.php");

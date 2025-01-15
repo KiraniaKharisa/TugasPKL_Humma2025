@@ -19,12 +19,12 @@ if(isset($_POST["submit"])) {
 
     if($cekUnik['status']) {
         if(editData("user_role", "id_role = $id", $data)) {
-            echo "<script> alert('Data Berhasil Diedit') 
+            echo "<script> alert('Data Edited Successfully') 
                 window.location.href = 'data_role.php';
             </script>";
             exit;
         } else {
-            echo "<script> alert('Data Gagal Diedit') </script>";
+            echo "<script> alert('Data Failed to Edit') </script>";
         }
     } else {
         $pesan = $cekUnik['pesan'];
@@ -36,9 +36,9 @@ if(isset($_POST["submit"])) {
     require_once("layout/atas.php");
     cekRole($user_login[0]['role_id'], '1');
 ?>
-<h3>Edit Data Role</h3>
+<h3>Edit Role Data</h3>
 <form action="" method="post">
-    <label for="namaRole">Nama Role</label>
+    <label for="namaRole">Role Name</label>
     <input type="text" name="namaRole" id="namaRole" placeholder="Masukkan Nama Role" required value="<?= cekValue($dataRole[0]['nama_role']) ?>">
 
     <button type="submit" name="submit" class="btn-submit">Edit Data</button>

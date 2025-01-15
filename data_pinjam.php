@@ -6,28 +6,28 @@
     if(isset($_POST['btnDelete'])) {
         $id = $_POST['id'];
         if(deleteQueryPinjaman("data_pinjam", "id_pinjam", $id)) {
-            echo "<script> alert('Data Berhasil Dihapus') 
+            echo "<script> alert('Data Deleted Successfully') 
                 window.location.href = 'data_pinjam.php';
             </script>";
             exit;
         } else {
-            echo "<script> alert('Data Gagal Dihapus') </script>";
+            echo "<script> alert('Data Failed to Delete') </script>";
         }
     }
 
     require_once("layout/atas.php");
     cekRole($user_login[0]['role_id'], '1');
 ?>
-<h3>Riwayat Peminjaman</h3>
-<a href="data_pinjam_tambah.php" class="btn btn-tambah">Tambah Data</a>
+<h3>Borrowing History</h3>
+<a href="data_pinjam_tambah.php" class="btn btn-tambah">Add Data</a>
 <table border="1" cellpadding="50" class="full">
     <tr>
         <th>No</th>
-        <th>Nama Peminjam</th>
-        <th>Nama Buku</th>
-        <th>Jumlah Buku</th>
-        <th>Tanggal Pinjam</th>
-        <th>Tanggal Kembali</th>
+        <th>Borrower Name</th>
+        <th>Book Name</th>
+        <th>Total Book's</th>
+        <th>Borrowing Date</th>
+        <th>Return Date</th>
         <th>Action</th>
     </tr>
     <?php

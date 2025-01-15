@@ -35,10 +35,10 @@ if(isset($_POST["submit"])) {
                         </script>";
                         exit;
                     } else {
-                        echo "<script> alert('Data Gagal Diedit') </script>";
+                        echo "<script> alert('Data Successfully Added') </script>";
                     }
                 } else {
-                    echo "<script> alert('Data Gagal Ditambahkan') </script>";
+                    echo "<script> alert('Data Failed to Add') </script>";
                 }
             } else {
                 $stock = $dataBuku_byid[0]["stock"];

@@ -11,12 +11,12 @@ if(isset($_POST["submit"])) {
 
     if($cekUnik['status']) {
         if(createData("user_role", $data)) {
-            echo "<script> alert('Data Berhasil Ditambahkan') 
+            echo "<script> alert('Data Successfully Added') 
                 window.location.href = 'data_role.php';
             </script>";
             exit;
         } else {
-            echo "<script> alert('Data Gagal Ditambahkan') </script>";
+            echo "<script> alert('Data Failed to Add') </script>";
         }
     } else {
         $pesan = $cekUnik['pesan'];
@@ -29,12 +29,12 @@ if(isset($_POST["submit"])) {
     require_once("layout/atas.php");
     cekRole($user_login[0]['role_id'], '1');
 ?>
-<h3>Tambah Data Role</h3>
+<h3>Add Role Data</h3>
 <form action="" method="post">
-    <label for="namaRole">Nama Role</label>
+    <label for="namaRole">Role Name</label>
     <input type="text" name="namaRole" id="namaRole" placeholder="Masukkan Nama Role" required>
 
-    <button type="submit" name="submit" class="btn-submit">Tambah Data</button>
+    <button type="submit" name="submit" class="btn-submit">Add Data</button>
 </form>
 <?php
     require_once("layout/bawah.php");

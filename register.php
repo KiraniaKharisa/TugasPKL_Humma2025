@@ -24,12 +24,12 @@ if(isset($_POST['register'])) {
         if($cekUnikUsername['status']) {
             if($cekUnikEmail['status']) {
                 if(createData("user", $data)) {
-                    echo "<script> alert('Registrasi Berhasil Silahkan Login') 
+                    echo "<script> alert('Registration Successful Please Login') 
                         window.location.href = 'login.php';
                     </script>";
                     exit;
                 } else {
-                    echo "<script> alert('Registrasi Gagal') </script>";
+                    echo "<script> alert('Registration Failed') </script>";
                 }
 
             } else {
@@ -44,7 +44,7 @@ if(isset($_POST['register'])) {
       
           
     } else {
-        echo "<script> alert('Password Tidak Cocok') </script>";
+        echo "<script> alert('Password Doesn't Match') </script>";
     }
 }
 
@@ -68,14 +68,14 @@ if(isset($_POST['register'])) {
         </div>
         <div class="login">
             <h3>WELCOME TO LIBRARY</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, ex.</p>
+            <p>Access your account and enjoy our excellent services.</p>
             <form action="" method="post">
-                <input type="text" name="nama" placeholder="Nama">
+                <input type="text" name="nama" placeholder="Name">
                 <input type="text" name="username" placeholder="Username">
                 <input type="text" name="email" placeholder="Email">
                 <select name="gender" id="gender" required>
-                    <option value="Laki-Laki">Laki-laki</option>
-                    <option value="Perempuan">Perempuan</option>
+                    <option value="Laki-Laki">MAN</option>
+                    <option value="Perempuan">WOMAN</option>
                 </select>
                 <input type="password" name="password" placeholder="Password">
                 <input type="password" name="konfirpassword" placeholder="Konfirmasi Password">

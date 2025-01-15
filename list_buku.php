@@ -29,7 +29,7 @@ if(isset($_GET['cariBtn'])) {
     <link rel="stylesheet" href="style/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <title>List buku</title>
+    <title>Book List</title>
 </head>
 <body>
 
@@ -38,11 +38,11 @@ if(isset($_GET['cariBtn'])) {
     ?>
 
     <section id="bestSeller" class="list_buku">
-        <h1>SEMUA BUKU</h1>
+        <h1>All THE BOOK'S</h1>
         <form class="cari" action="">
-            <input type="text" name="cari" placeholder="Cari buku berdasarkan nama, penulis, penerbit">
+            <input type="text" name="cari" placeholder="Search books by name, author, publisher">
             <select name="kategori" id="">
-                <option value="">Semua Buku</option>
+                <option value="">ALL THE BOOK'S</option>
                 <?php foreach($dataKategori as $data) : ?>
                     <?php if(isset($_GET['kategori'])) : ?>
                         <option <?= $_GET['kategori'] == $data['id_kategori'] ? "selected" : "" ?> value="<?= $data['id_kategori'] ?>"><?= $data['nama_kategori'] ?></option>
@@ -51,7 +51,7 @@ if(isset($_GET['cariBtn'])) {
                     <?php endif; ?>
                 <?php endforeach; ?>
             </select>
-            <button type="submit" name="cariBtn" class="btn-submit">Cari</button>
+            <button type="submit" name="cariBtn" class="btn-submit">Search</button>
         </form>
         <div class="container">
         <?php foreach($dataBuku as $d) : ?>
@@ -62,14 +62,14 @@ if(isset($_GET['cariBtn'])) {
                 <div class="detail">
                 <h2 class="judul"><?= $d['nama_buku'] ?></h2>
                     <ul>
-                        <li>Kategori : <?= $d['nama_kategori'] ?></li>
-                        <li>Penulis : <?= $d['penulis'] ?></li>
-                        <li>Penerbit : <?= $d['penerbit'] ?></li>
-                        <li>Stok : <?= $d['stock'] ?> Buku</li>
+                        <li>Category : <?= $d['nama_kategori'] ?></li>
+                        <li>Author : <?= $d['penulis'] ?></li>
+                        <li>Publisher : <?= $d['penerbit'] ?></li>
+                        <li>Stock : <?= $d['stock'] ?> Book's</li>
                     </ul>
                 </div>
                 <div class="button">
-                    <a class="buy" href="form_pinjam.php?buku_id=<?= $d['id_buku'] ?>">Pinjam</a>
+                    <a class="buy" href="form_pinjam.php?buku_id=<?= $d['id_buku'] ?>">borrow</a>
 
                 </div>
             </div>
@@ -97,7 +97,7 @@ if(isset($_GET['cariBtn'])) {
         </div>
 
         <div class="copyright">
-            <h3>&copy; PERPUS RANIA 2025</h3>
+            <h3>&copy; RANIA LIBRARY 2025</h3>
         </div>
     </footer>
 

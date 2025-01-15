@@ -20,7 +20,7 @@ $data = dataQuery("SELECT * FROM buku INNER JOIN kategori_buku ON buku.category_
     <link rel="stylesheet" href="style/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <title>Perpustakaan Rania</title>
+    <title>Rania Library</title>
 </head>
 <body>
 
@@ -44,8 +44,8 @@ $data = dataQuery("SELECT * FROM buku INNER JOIN kategori_buku ON buku.category_
         <h1>ABOUT</h1>
         <div class="container">
             <div class="kotak1">
-                <h3>Tentang Perpustakaan Kami</h3>
-                <p>Perpustakaan website adalah platform digital yang menyediakan akses ke berbagai koleksi informasi, seperti buku elektronik (e-book), jurnal, artikel, video, atau multimedia lainnya. Berfungsi sebagai pusat sumber daya daring, perpustakaan ini memungkinkan pengguna untuk mencari, membaca, dan mengunduh materi yang relevan kapan saja dan di mana saja. Biasanya dilengkapi dengan fitur pencarian, filter, dan kategori untuk mempermudah navigasi. Selain itu, perpustakaan website dapat menawarkan layanan tambahan, seperti peminjaman e-book, diskusi komunitas, atau panduan belajar. Perpustakaan jenis ini banyak digunakan oleh institusi pendidikan, organisasi, atau masyarakat umum untuk mendukung pembelajaran, penelitian, dan pengembangan pengetahuan.</p>
+                <h3>About Our Library</h3>
+                <p>A web library is a digital platform that provides access to various collections of information, such as e-books, journals, articles, videos, or other multimedia. Serving as an online resource center, these libraries allow users to search, read and download relevant materials anytime and anywhere. It is usually equipped with search features, filters, and categories to make navigation easier. In addition, web libraries may offer additional services, such as e-book lending, community discussions, or study guides. This type of library is widely used by educational institutions, organizations, or the general public to support learning, research, and knowledge development.</p>
             </div>
             <div class="kotak2">
                 <img src="img/gambar2.png" alt="">
@@ -64,14 +64,14 @@ $data = dataQuery("SELECT * FROM buku INNER JOIN kategori_buku ON buku.category_
                 <div class="detail">
                 <h2 class="judul"><?= $d['nama_buku'] ?></h2>
                     <ul>
-                        <li>Kategori : <?= $d['nama_kategori'] ?></li>
-                        <li>Penulis : <?= $d['penulis'] ?></li>
-                        <li>Penerbit : <?= $d['penerbit'] ?></li>
-                        <li>Stok : <?= $d['stock'] ?> Buku</li>
+                        <li>Category : <?= $d['nama_kategori'] ?></li>
+                        <li>Author : <?= $d['penulis'] ?></li>
+                        <li>Publisher : <?= $d['penerbit'] ?></li>
+                        <li>Stock : <?= $d['stock'] ?> Book</li>
                     </ul>
                 </div>
                 <div class="button">
-                    <a class="buy" href="form_pinjam.php?buku_id=<?= $d['id_buku'] ?>">Pinjam</a>
+                    <a class="buy" href="form_pinjam.php?buku_id=<?= $d['id_buku'] ?>">Borrow</a>
 
                 </div>
             </div>
@@ -79,7 +79,7 @@ $data = dataQuery("SELECT * FROM buku INNER JOIN kategori_buku ON buku.category_
         </div>
         
         <div class="selengkapnya">
-            <a href="list_buku.php">Lebih Banyak Buku</a>
+            <a href="list_buku.php">More Book's</a>
         </div>
     </section>
     
@@ -117,7 +117,7 @@ $data = dataQuery("SELECT * FROM buku INNER JOIN kategori_buku ON buku.category_
         </div>
 
         <div class="copyright">
-            <h3>&copy; PERPUS RANIA 2025</h3>
+            <h3>&copy; RANIA LIBRARY 2025</h3>
         </div>
     </footer>
 

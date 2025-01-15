@@ -8,17 +8,17 @@
     if(isset($_POST['kembalikan'])) {
         $id = $_POST['id'];
         if(deleteQueryPinjaman("data_pinjam", "id_pinjam", $id)) {
-            echo "<script> alert('Terimakasih telah meminjam buku kami') 
+            echo "<script> alert('Thank you for borrowing our books') 
                 window.location.href = 'dashboard.php';
             </script>";
             exit;
         } else {
-            echo "<script> alert('Data Gagal Dihapus') </script>";
+            echo "<script> alert('Data Failed to Delete') </script>";
         }
     }
 
 ?>
-<h3>Selamat Datang <?= $user_login[0]['nama_user'] ?>, <?= $user_login[0]['nama_role'] ?></h3>
+<h3>WELCOME <?= $user_login[0]['nama_user'] ?>, <?= $user_login[0]['nama_role'] ?></h3>
 
 <div id="myBook">
 <div class="container">
@@ -30,18 +30,18 @@
         <div class="detail">
             <h2 class="judul"><?= $d['nama_buku'] ?></h2>
             <ul>
-                <li>Kategori : <?= $d['nama_kategori'] ?></li>
-                <li>Penulis : <?= $d['penulis'] ?></li>
-                <li>Penerbit : <?= $d['penerbit'] ?></li>
-                <li>Jumlah : <?= $d['jumlah'] ?> Buku</li>
+                <li>Category : <?= $d['nama_kategori'] ?></li>
+                <li>Author : <?= $d['penulis'] ?></li>
+                <li>Publisher : <?= $d['penerbit'] ?></li>
+                <li>Total : <?= $d['jumlah'] ?> Buku</li>
             </ul>
             <?php if($d['tanggal_kembali'] < $tanggalSekarang) : ?>
-                <h3 class="kembali">Kembalikan Buku Ini</h3>
+                <h3 class="kembali">Return This Book</h3>
             <?php endif; ?>
         </div>
         <form action="" method="post" class="button">
             <input type="hidden" name="id" value="<?= $d["id_pinjam"] ?>">
-            <button type="submit" name="kembalikan" class="kembalikan">Kembalikan</button>
+            <button type="submit" name="kembalikan" class="kembalikan">Restore</button>
         </form>
     </div>
     <?php endforeach; ?>

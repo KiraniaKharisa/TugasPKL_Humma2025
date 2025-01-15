@@ -57,7 +57,7 @@ if(isset($_POST["submit"])) {
                         ];
                         
                         if(editData("buku", "id_buku = {$_POST['buku']}", $dataBuku)) {
-                            echo "<script> alert('Data Berhasil Diedit') 
+                            echo "<script> alert('Data Edited Successfully') 
                             window.location.href = 'data_pinjam.php';
                             </script>";
                             exit;
@@ -73,7 +73,7 @@ if(isset($_POST["submit"])) {
                                 $ubahJumlah = true;
                             }
     
-                            echo "<script> alert('Data Buku Gagal Diedit') </script>";
+                            echo "<script> alert('Book Data Failed to Be Edited') </script>";
                         }
                     } else {
                         // Jika Ia Mengganti jumlah tapi gagal menambahkan maka kembalikan data nya seperti semula
@@ -86,7 +86,7 @@ if(isset($_POST["submit"])) {
                             editData("buku", "id_buku = {$_POST['buku']}", $dataBuku);
                         }
     
-                        echo "<script> alert('Data Gagal Diedit') </script>";
+                        echo "<script> alert('Data Failed to Edit') </script>";
                     }
                 } else {
     
@@ -101,48 +101,48 @@ if(isset($_POST["submit"])) {
                     }
     
                     $stock = $dataBuku_byid[0]["stock"];
-                    echo "<script> alert(`Jumlah Yang Anda Pinjam Melebihi Stock, Stock Kami Tinggal $stock`) </script>";
+                    echo "<script> alert(`The Amount You Borrow Exceeds Stock, Our Stock Remains $stock`) </script>";
                 }
             } else {
-                echo "<script> alert('Tanggal Kembali Tidak Boleh Kurang Dari Tanggal Sekarang') </script>";
+                echo "<script> alert('The Return date Cannot Be Less Than The Current Date') </script>";
             }
             
         } else {
-            echo "<script> alert('Tanggal Kembali Tidak Boleh Kurang Dari Tanggal Pinjam') </script>";
+            echo "<script> alert('Return Date Cannot Be Less Than The Borrowing Date') </script>";
 
         }
         
     } else {
-        echo "<script> alert('Yang Anda Masukin Bukan Tanggal Sesuai Format') </script>";
+        echo "<script> alert('Waht You Entered Is Not The Date According To The Format') </script>";
     }
 }
 
     require_once("layout/atas.php");
     cekRole($user_login[0]['role_id'], '1');
 ?>
-<h3>Edit Data Pinjam</h3>
+<h3>Edit Borrowed Data</h3>
 <form action="" method="post">
-    <label for="user">Nama User</label>
+    <label for="user">User Name</label>
     <select name="user" id="user" required>
         <?php foreach($data_user as $data) : ?>
             <option <?= ($data['id_user'] == $data_pinjam[0]['user_id'] ? 'selected' : '') ?> value="<?= $data['id_user']; ?>"><?= $data['nama_user']; ?></option>
         <?php endforeach; ?>
     </select>
 
-    <label for="buku">Nama Buku</label>
+    <label for="buku">Book Name</label>
     <select name="buku" id="buku" required>
         <?php foreach($data_buku as $data) : ?>
             <option <?= ($data['id_buku'] == $data_pinjam[0]['buku_id'] ? 'selected' : '') ?> value="<?= $data['id_buku']; ?>"><?= $data['nama_buku']; ?></option>
         <?php endforeach; ?>
     </select>
 
-    <label for="jumlah_pinjam">Jumlah Pinjam</label>
+    <label for="jumlah_pinjam">Total Borrowing</label>
     <input type="number" min="1" step="1" name="jumlah_pinjam" id="jumlah_pinjam" placeholder="Masukkan Jumlah Peminjaman" required value="<?= cekValue($data_pinjam[0]['jumlah']) ?>">
     
-    <label for="tanggal_pinjam">Tanggal Pinjam</label>
+    <label for="tanggal_pinjam">Borrowing Date</label>
     <input type="date" name="tanggal_pinjam" id="tanggal_pinjam" placeholder="Masukkan Tanggal Peminjaman" required value="<?= cekValue($data_pinjam[0]['tanggal_pinjam']) ?>">
     
-    <label for="tanggal_kembali">Tanggal Kembali</label>
+    <label for="tanggal_kembali">Return date</label>
     <input type="date" name="tanggal_kembali" id="tanggal_kembali" placeholder="Masukkan Tanggal Kembali" required value="<?= cekValue($data_pinjam[0]['tanggal_kembali']) ?>">
 
     <button type="submit" name="submit" class="btn-submit">Edit Data</button>

@@ -39,12 +39,12 @@ if(isset($_POST["submit"])) {
 
 
             if(createData("user", $data)) {
-                echo "<script> alert('Data Berhasil Ditambahkan') 
+                echo "<script> alert('Data Added Successfully') 
                     window.location.href = 'data_user.php';
                 </script>";
                 exit;
             } else {
-                echo "<script> alert('Data Gagal Ditambahkan') </script>";
+                echo "<script> alert('Data Failed to Add') </script>";
             }
 
         } else {
@@ -62,9 +62,9 @@ if(isset($_POST["submit"])) {
     require_once("layout/atas.php");
     cekRole($user_login[0]['role_id'], '1');
 ?>
-<h3>Tambah Data User</h3>
+<h3>Add User Data</h3>
 <form action="" method="post" enctype="multipart/form-data">
-    <label for="name">Nama</label>
+    <label for="name">Name</label>
     <input type="text" name="name" id="name" placeholder="Masukkan Nama" required>
 
     <label for="username">Username</label>
@@ -73,10 +73,10 @@ if(isset($_POST["submit"])) {
     <label for="email">Email</label>
     <input type="email" name="email" id="email" placeholder="Masukkan Email" required>
 
-    <label for="gender">Jenis Kelamin</label>
+    <label for="gender">Gender</label>
     <select name="gender" id="gender" required>
-        <option value="Laki-Laki">Laki-laki</option>
-        <option value="Perempuan">Perempuan</option>
+        <option value="Laki-Laki">Man</option>
+        <option value="Perempuan">Woman</option>
     </select>
 
     <label for="role">Role</label>
@@ -90,7 +90,7 @@ if(isset($_POST["submit"])) {
     <input type="password" name="password" id="password" placeholder="Masukkan Password" required>
 
     <label class="file-upload">
-        Pilih Profile
+        Choose Profile
         <input type="file" id="fileInput" name="profile">
     </label>
 
@@ -98,9 +98,9 @@ if(isset($_POST["submit"])) {
     <div class="preview-container" id="previewContainer">
         <img id="previewImage" src="img/profile/default.jpg" alt="Preview Gambar" mode="edit">
     </div>
-    <button class="hapusProfile">Hapus Profile</button>
+    <button class="hapusProfile">Delete Profile</button>
 
-    <button type="submit" name="submit" class="btn-submit">Tambah Data</button>
+    <button type="submit" name="submit" class="btn-submit">Add Data</button>
 </form>
 <?php
     require_once("layout/bawah.php");
